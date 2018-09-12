@@ -87,9 +87,12 @@ getResultado_v1(1).then( (opositorYNotas) => {
 })
 
 // ASYNC-AWAIT para obtener el nombre y las notas del opositor1
+// async devuelve una Promesa
 const getResultado = async (id) => {
   const opositor = await getOpositor(id)
   const notas = await getNotas(id)
+
+  const arrayValues = await Promise.all([opositor, notas])
 
   if (notas.length > 0) {
     media = notas.map((nota) => nota.nota).reduce((a, b) => a + b) / notas.length
